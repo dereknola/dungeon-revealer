@@ -64,6 +64,13 @@ const ToolbarItem = styled.li<{
   padding-right: ${(p) => (p.horizontal ? "8px" : "0")};
   height: ${(p) => (p.horizontal ? "50px" : "auto")};
 
+  /* ADD THIS MEDIA QUERY */
+  @media (max-width: 800px) {
+    min-width: ${(p) => (p.horizontal ? "50px" : null)};
+    padding-left: ${(p) => (p.horizontal ? "2px" : null)};
+    padding-right: ${(p) => (p.horizontal ? "2px" : null)};
+  }
+
   display: flex;
   flex-direction: column;
   justify-content: center;

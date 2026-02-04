@@ -1066,12 +1066,21 @@ const BottomToolbarContainer = styled.div`
   bottom: 12px;
   pointer-events: none;
   flex-wrap: wrap;
+
+  /* Add z-index to ensure it sits above the map canvas */
+  z-index: 10;
 `;
 
 const MarginLeftDiv = styled.div`
   margin-left: 24px;
+  /* Increase the breakpoint or reduce margin for tablets */
+  @media (max-width: 800px) {
+    margin-left: 8px;
+  }
   @media (max-width: 580px) {
     margin-left: 0px;
+    width: 100%; /* Force a break on very small screens if needed, or keep 0 margin */
+    height: 8px; /* Add vertical spacing if they wrap */
   }
 `;
 

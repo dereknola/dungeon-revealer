@@ -87,12 +87,9 @@ type TokenPartial = Omit<Partial<MapTokenEntity>, "id">;
 
 const LoadedMapDiv = styled.div`
   display: flex;
-  height: 100vh;
+  height: 100vh; /* Fallback for older browsers */
+  height: 100dvh; /* Use dynamic viewport height for modern mobile browsers */
   background-color: black;
-  /* Mobile Chrome 100vh issue with address bar */
-  @media screen and (max-width: 580px) and (-webkit-min-device-pixel-ratio: 0) {
-    height: calc(100vh - 56px);
-  }
 `;
 
 const DmAreaTokenAddManyMutation = graphql`

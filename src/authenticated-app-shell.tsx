@@ -30,7 +30,9 @@ const useShowChatState = () =>
         typeof value !== "string" ||
         ["show", "hidden"].includes(value) === false
       ) {
-        return "show";
+        // Default to hidden on mobile, shown on desktop
+        const isMobile = window.matchMedia("(max-width: 768px)").matches;
+        return isMobile ? "hidden" : "show";
       }
       return value as "show" | "hidden";
     },
