@@ -20,10 +20,10 @@ jobs:
             ghcr.io/${{ github.repository_owner }}/dungeon-revealer
             ${{ secrets.DOCKER_USERNAME }}/dungeon-revealer
 
-      - name: Use Node.js 22.x
+      - name: Use Node.js 25.x
         uses: actions/setup-node@v4
         with:
-          node-version: "22.x"
+          node-version: "25.x"
 
       - name: Node Install
         run: |
