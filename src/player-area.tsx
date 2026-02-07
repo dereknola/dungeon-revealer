@@ -27,7 +27,6 @@ import {
   useNoteWindowActions,
 } from "./dm-area/token-info-aside";
 import { playerArea_PlayerMap_ActiveMapQuery } from "./__generated__/playerArea_PlayerMap_ActiveMapQuery.graphql";
-import { playerArea_MapPingMutation } from "./__generated__/playerArea_MapPingMutation.graphql";
 import { UpdateTokenContext } from "./update-token-context";
 import { LazyLoadedMapView } from "./lazy-loaded-map-view";
 
@@ -67,12 +66,6 @@ const PlayerMap_ActiveMapQuery = graphql`
   }
 `;
 
-const MapPingMutation = graphql`
-  mutation playerArea_MapPingMutation($input: MapPingInput!) {
-    mapPing(input: $input)
-  }
-`;
-
 const PlayerMap = ({
   fetch,
   socket,
@@ -85,7 +78,6 @@ const PlayerMap = ({
   const currentMap = useQuery<playerArea_PlayerMap_ActiveMapQuery>(
     PlayerMap_ActiveMapQuery
   );
-  const [mapPing] = useMutation<playerArea_MapPingMutation>(MapPingMutation);
 
   const mapId = currentMap?.data?.activeMap?.id ?? null;
   const showSplashScreen = mapId === null;
@@ -199,28 +191,6 @@ const PlayerMap = ({
       >
         <FlatContextProvider
           value={[
-            [
-              MarkAreaToolContext.Provider,
-              {
-                value: {
-                  onMarkArea: ([x, y]) => {
-                    if (currentMap.data?.activeMap) {
-                      mapPing({
-                        variables: {
-                          input: {
-                            mapId: currentMap.data.activeMap.id,
-                            x,
-                            y,
-                          },
-                        },
-                      });
-                    }
-                  },
-                },
-              },
-            ] as ComponentWithPropsTuple<
-              React.ComponentProps<typeof MarkAreaToolContext.Provider>
-            >,
             [
               UpdateTokenContext.Provider,
               {
